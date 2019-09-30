@@ -35,6 +35,7 @@ void ImageLabel::setIsEditing(bool value)
         oldLandMarks=landMarks;
     }else{
         setMouseTracking (false);
+        landMarks=oldLandMarks;
     }
 }
 
@@ -56,6 +57,27 @@ bool ImageLabel::getIsPictured() const
 void ImageLabel::setIsPictured(bool value)
 {
     isPictured = value;
+}
+
+void ImageLabel::clearPoints()
+{
+    landMarks.clear();
+}
+
+void ImageLabel::resetPoints()
+{
+    landMarks=oldLandMarks;
+}
+
+void ImageLabel::setPoints(QVector<QPoint> &ps)
+{
+    landMarks.clear();
+    landMarks.append(ps);
+}
+
+QVector<QPoint> ImageLabel::getPoints()
+{
+    return landMarks;
 }
 
 

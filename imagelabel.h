@@ -15,8 +15,6 @@ public:
     explicit ImageLabel(QWidget *parent = 0);
     QString getPic() const;
     void setPic(QString value);
-    QVector<QPoint> landMarks;
-    QVector<QPoint> oldLandMarks;
     bool getIsEditing() const;
     void setIsEditing(bool value);
     bool getIsLoaded() const;
@@ -24,8 +22,13 @@ public:
 
     bool getIsPictured() const;
     void setIsPictured(bool value);
-
+    void clearPoints();
+    void resetPoints();
+    void setPoints(QVector<QPoint> &ps);
+    QVector<QPoint> getPoints();
 private:
+    QVector<QPoint> landMarks;
+    QVector<QPoint> oldLandMarks;
     QString pic;
     bool isEditing;
     bool isPictured;

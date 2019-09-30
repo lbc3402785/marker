@@ -32,10 +32,12 @@ public:
     QWidget *centralwidget;
     QGridLayout *gridLayout;
     QPushButton *save;
-    QPushButton *edit;
     ImageLabel *canvas;
+    QPushButton *edit;
+    QPushButton *reset;
+    QPushButton *clear;
     QMenuBar *menubar;
-    QMenu *menu;
+    QMenu *file;
     QMenu *menu_2;
     QStatusBar *statusbar;
 
@@ -43,7 +45,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(800, 600);
+        MainWindow->resize(800, 687);
         open = new QAction(MainWindow);
         open->setObjectName(QString::fromUtf8("open"));
         saveAs = new QAction(MainWindow);
@@ -60,11 +62,6 @@ public:
         save->setObjectName(QString::fromUtf8("save"));
 
         gridLayout->addWidget(save, 1, 1, 1, 1);
-
-        edit = new QPushButton(centralwidget);
-        edit->setObjectName(QString::fromUtf8("edit"));
-
-        gridLayout->addWidget(edit, 1, 0, 1, 1);
 
         canvas = new ImageLabel(centralwidget);
         canvas->setObjectName(QString::fromUtf8("canvas"));
@@ -142,12 +139,27 @@ public:
 
         gridLayout->addWidget(canvas, 0, 0, 1, 2);
 
+        edit = new QPushButton(centralwidget);
+        edit->setObjectName(QString::fromUtf8("edit"));
+
+        gridLayout->addWidget(edit, 1, 0, 1, 1);
+
+        reset = new QPushButton(centralwidget);
+        reset->setObjectName(QString::fromUtf8("reset"));
+
+        gridLayout->addWidget(reset, 2, 0, 1, 1);
+
+        clear = new QPushButton(centralwidget);
+        clear->setObjectName(QString::fromUtf8("clear"));
+
+        gridLayout->addWidget(clear, 2, 1, 1, 1);
+
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
         menubar->setGeometry(QRect(0, 0, 800, 23));
-        menu = new QMenu(menubar);
-        menu->setObjectName(QString::fromUtf8("menu"));
+        file = new QMenu(menubar);
+        file->setObjectName(QString::fromUtf8("file"));
         menu_2 = new QMenu(menubar);
         menu_2->setObjectName(QString::fromUtf8("menu_2"));
         MainWindow->setMenuBar(menubar);
@@ -155,10 +167,10 @@ public:
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         MainWindow->setStatusBar(statusbar);
 
-        menubar->addAction(menu->menuAction());
+        menubar->addAction(file->menuAction());
         menubar->addAction(menu_2->menuAction());
-        menu->addAction(open);
-        menu->addAction(saveAs);
+        file->addAction(open);
+        file->addAction(saveAs);
         menu_2->addAction(load);
 
         retranslateUi(MainWindow);
@@ -176,9 +188,11 @@ public:
 #endif // QT_CONFIG(tooltip)
         load->setText(QCoreApplication::translate("MainWindow", "\345\257\274\345\205\245", nullptr));
         save->setText(QCoreApplication::translate("MainWindow", "save", nullptr));
-        edit->setText(QCoreApplication::translate("MainWindow", "edit", nullptr));
         canvas->setText(QString());
-        menu->setTitle(QCoreApplication::translate("MainWindow", "\346\226\207\344\273\266", nullptr));
+        edit->setText(QCoreApplication::translate("MainWindow", "edit", nullptr));
+        reset->setText(QCoreApplication::translate("MainWindow", "reset", nullptr));
+        clear->setText(QCoreApplication::translate("MainWindow", "clear", nullptr));
+        file->setTitle(QCoreApplication::translate("MainWindow", "\346\226\207\344\273\266", nullptr));
         menu_2->setTitle(QCoreApplication::translate("MainWindow", "\345\267\245\345\205\267", nullptr));
     } // retranslateUi
 

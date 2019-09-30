@@ -24,6 +24,10 @@ private slots:
 
     void on_edit_clicked();
 
+    void on_clear_clicked();
+
+    void on_reset_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
