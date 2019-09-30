@@ -31,8 +31,8 @@ public:
     QAction *load;
     QWidget *centralwidget;
     QGridLayout *gridLayout;
-    QPushButton *edit;
     QPushButton *save;
+    QPushButton *edit;
     ImageLabel *canvas;
     QMenuBar *menubar;
     QMenu *menu;
@@ -56,15 +56,15 @@ public:
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        edit = new QPushButton(centralwidget);
-        edit->setObjectName(QString::fromUtf8("edit"));
-
-        gridLayout->addWidget(edit, 1, 0, 1, 1);
-
         save = new QPushButton(centralwidget);
         save->setObjectName(QString::fromUtf8("save"));
 
         gridLayout->addWidget(save, 1, 1, 1, 1);
+
+        edit = new QPushButton(centralwidget);
+        edit->setObjectName(QString::fromUtf8("edit"));
+
+        gridLayout->addWidget(edit, 1, 0, 1, 1);
 
         canvas = new ImageLabel(centralwidget);
         canvas->setObjectName(QString::fromUtf8("canvas"));
@@ -175,8 +175,8 @@ public:
         saveAs->setToolTip(QCoreApplication::translate("MainWindow", "\345\217\246\345\255\230\344\270\272", nullptr));
 #endif // QT_CONFIG(tooltip)
         load->setText(QCoreApplication::translate("MainWindow", "\345\257\274\345\205\245", nullptr));
-        edit->setText(QCoreApplication::translate("MainWindow", "edit", nullptr));
         save->setText(QCoreApplication::translate("MainWindow", "save", nullptr));
+        edit->setText(QCoreApplication::translate("MainWindow", "edit", nullptr));
         canvas->setText(QString());
         menu->setTitle(QCoreApplication::translate("MainWindow", "\346\226\207\344\273\266", nullptr));
         menu_2->setTitle(QCoreApplication::translate("MainWindow", "\345\267\245\345\205\267", nullptr));

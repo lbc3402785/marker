@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QFileDialog>
+#include <QMessageBox>
 #include <QDebug>
 #include <vector>
 #include "cnpy.h"
@@ -30,6 +31,7 @@ void MainWindow::on_open_triggered()
 //    this->ui->canvas->setPixmap(*pic);
 //    this->ui->canvas->setPixmap(QPixmap(fileName));
     this->ui->canvas->setPic(fileName);
+    this->ui->canvas->setIsPictured(true);
 }
 void MainWindow::on_saveAs_triggered()
 {
@@ -38,6 +40,10 @@ void MainWindow::on_saveAs_triggered()
 
 void MainWindow::on_load_triggered()
 {
+    if(!this->ui->canvas->getIsPictured()){
+        QMessageBox::warning(NULL, "warning", "No picture!", QMessageBox::Cancel );
+        return;
+    }
     QString fileName = QFileDialog::getOpenFileName(this,
                                                     tr("文件对话框！"),
                                                     "E:",
@@ -51,7 +57,23 @@ void MainWindow::on_load_triggered()
        for(int i=0;i<coord.size()/2;i++){
            this->ui->canvas->landMarks.push_back( QPoint(coord[2*i],coord[2*i+1]));
        }
+       this->ui->canvas->setIsLoaded(true);
     } catch (std::exception&e) {
         std::cout<<e.what()<<std::endl;
+    }
+}
+
+void MainWindow::on_edit_clicked()
+{
+    if(this->ui->canvas->getIsLoaded()){
+        if(this->ui->canvas->getIsEditing()){
+            this->ui->canvas->setIsEditing(false);
+            this->ui->load->setDisabled(false);
+            this->ui->open->setDisabled(false);
+        }else{
+            this->ui->canvas->setIsEditing(true);
+            this->ui->load->setDisabled(true);
+            this->ui->open->setDisabled(true);
+        }
     }
 }
