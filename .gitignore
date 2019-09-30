@@ -5,5 +5,4 @@
 *.pro.*
 Makefile*
 *.jpg
-*.png
 *.obj
