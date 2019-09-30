@@ -2,7 +2,10 @@
 /debug
 /build
 /data
+/facedata
 *.pro.*
 Makefile*
 *.jpg
 *.obj
+*.png
+*.npy

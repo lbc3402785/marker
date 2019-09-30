@@ -28,8 +28,10 @@ private slots:
 
     void on_reset_clicked();
 
+    void on_save_clicked();
 private:
     Ui::MainWindow *ui;
+    QString keyFileName;
 };
 
 #endif // MAINWINDOW_H

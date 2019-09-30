@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    keyFileName="";
     ui->setupUi(this);
 }
 
@@ -26,10 +27,6 @@ void MainWindow::on_open_triggered()
                                                         "E:",
                                                         tr("图片文件(*png *jpg);;"
                                                            "本本文件(*txt)"));
-//    qDebug()<<"filename : "<<fileName;
-//    this->ui->canvas->setPic(fileName);
-//    this->ui->canvas->setPixmap(*pic);
-//    this->ui->canvas->setPixmap(QPixmap(fileName));
     this->ui->canvas->setPic(fileName);
     this->ui->canvas->setIsPictured(true);
 }
@@ -77,7 +74,6 @@ void MainWindow::on_load_triggered()
                                                     "E:",
                                                     tr("图片文件(*npy *npz);;"
                                                        "本本文件(*txt)"));
-    qDebug()<<"filename : "<<fileName;
     try {
        cnpy::NpyArray npy=cnpy::npy_load(fileName.toStdString());
        std::vector<float> coord=npy.as_vec<float>();
@@ -87,6 +83,7 @@ void MainWindow::on_load_triggered()
        }
        this->ui->canvas->setPoints(points);
        this->ui->canvas->setIsLoaded(true);
+       keyFileName=fileName;
     } catch (std::exception&e) {
         std::cout<<e.what()<<std::endl;
     }
@@ -111,8 +108,9 @@ void MainWindow::on_clear_clicked()
 {
     if(this->ui->canvas->getIsEditing()){
         this->ui->canvas->clearPoints();
-//        this->ui->load->setDisabled(false);
-//        this->ui->open->setDisabled(false);
+        this->ui->canvas->setIsEditing(false);
+        this->ui->load->setDisabled(false);
+        this->ui->open->setDisabled(false);
     }
 }
 
@@ -120,5 +118,24 @@ void MainWindow::on_reset_clicked()
 {
     if(this->ui->canvas->getIsEditing()){
         this->ui->canvas->resetPoints();
+    }
+}
+
+void MainWindow::on_save_clicked()
+{
+    try {
+       QVector<QPoint> points=this->ui->canvas->getPoints();
+       size_t n=points.size();
+       std::vector<float> out(2*n,0.0f);
+       for(size_t i=0;i<n;i++){
+           out[2*i]=points[i].x();
+           out[2*i+1]=points[i].y();
+       }
+       std::vector<size_t> size(2,0);
+       size[0]=n;size[1]=2;
+       cnpy::npy_save(keyFileName.toStdString(),out.data(),size,"w");
+       QMessageBox::warning(this,tr("提示"),tr("保存文件成功"));
+    } catch (std::exception&e) {
+        std::cout<<e.what()<<std::endl;
     }
 }

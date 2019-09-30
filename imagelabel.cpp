@@ -8,6 +8,7 @@ ImageLabel::ImageLabel(QWidget *parent): QLabel(parent)
 {
     pic="";
     isEditing=false;
+    isLoaded=false;
     editIndex=-1;
     isPointChange=false;
 }
@@ -35,7 +36,7 @@ void ImageLabel::setIsEditing(bool value)
         oldLandMarks=landMarks;
     }else{
         setMouseTracking (false);
-        landMarks=oldLandMarks;
+        //landMarks=oldLandMarks;
     }
 }
 
@@ -79,8 +80,6 @@ QVector<QPoint> ImageLabel::getPoints()
 {
     return landMarks;
 }
-
-
 
 inline void drawPolyline(QPainter& painters,QVector<QPoint> &v,int start,int end,bool closed=false)
 {
