@@ -28,7 +28,8 @@ void MainWindow::on_open_triggered()
 //    qDebug()<<"filename : "<<fileName;
 //    this->ui->canvas->setPic(fileName);
 //    this->ui->canvas->setPixmap(*pic);
-    this->ui->canvas->setPixmap(QPixmap(fileName));
+//    this->ui->canvas->setPixmap(QPixmap(fileName));
+    this->ui->canvas->setPic(fileName);
 }
 void MainWindow::on_saveAs_triggered()
 {

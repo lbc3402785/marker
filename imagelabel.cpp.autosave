@@ -39,7 +39,7 @@ void ImageLabel::paintEvent(QPaintEvent *event)
 
 //    QPen penNode; //设置点的样式
 //    penNode.setColor(Qt::red); //改变颜色
-    if(!landMarks.empty()){
+    if(pic.length()>0&&!landMarks.empty()){
         QPainter painters(this);
         QPen penNode; //设置点的样式
         penNode.setColor(Qt::red); //改变颜色
@@ -72,6 +72,7 @@ void ImageLabel::resizeEvent(QResizeEvent *event)
    //const QPixmap* pix=this->pixmap();
     if(this->pixmap()){
         qDebug()<<this->pos();
+        
         //std::cout<<pix->rect().left()<<","<<pix->rect().top()<<std::endl;
     }
 //    if(pic.length()>0){

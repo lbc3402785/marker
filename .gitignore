@@ -1,9 +1,7 @@
 /release
 /debug
 /build
-/facedata
 /data
-*.pro
 *.pro.*
 Makefile*
 *.jpg
