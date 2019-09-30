@@ -3,7 +3,7 @@
 #include <QDebug>
 #include <QToolTip>
 #include <iostream>
-#define DRAGDIS 5
+#define DRAGDIS 3
 ImageLabel::ImageLabel(QWidget *parent): QLabel(parent)
 {
     pic="";
